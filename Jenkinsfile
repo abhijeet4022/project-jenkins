@@ -30,7 +30,7 @@ pipeline {
                 echo SSH
             }
         }
-                stage('Hello') {
+        stage('Hello') {
             steps {
                 echo "Hello World"
             }

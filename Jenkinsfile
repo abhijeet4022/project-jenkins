@@ -30,11 +30,13 @@ pipeline {
                 echo SSH
             }
         }
+
         stage('Hello') {
             steps {
                 echo "Hello World"
             }
         }
+
         stage('Test') {
             steps {
                 echo "Test for pollSCM"

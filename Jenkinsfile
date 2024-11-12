@@ -10,7 +10,10 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                   sh 'pwd'
+                    // Add valid shell commands here
+                    sh 'echo "Running compile stage"'
+                    sh 'pwd'
+                    sh 'ls -l'
                 }
             }
         }
@@ -32,9 +35,8 @@ pipeline {
         always {
             script {
                 echo "Build finished"
-                cleanWs() // Optionally clean up the workspace after the build
+                cleanWs()
             }
         }
     }
-
 }

@@ -71,13 +71,4 @@ node('workstation') {
         print z                // Prints '30'
     }
 
-// 3. Post Build Actions
-    post {
-        always {
-            script {
-                echo "Build finished" // Log message indicating the build completion
-                cleanWs()             // Cleans the workspace after the build
-            }
-        }
-    }
 }

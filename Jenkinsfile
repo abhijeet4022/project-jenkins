@@ -61,6 +61,7 @@ node('workstation'){
         sh "echo y is ${env.y}"
         sh 'echo y - ${y}'
         echo "z is ${z}"
+        print z
     }
 
     post {

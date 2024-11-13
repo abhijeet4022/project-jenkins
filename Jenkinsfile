@@ -57,7 +57,7 @@ node('workstation'){
 
     stage('Access_Variable'){
         print x
-        sh 'echo y is $(y)'
+        sh 'echo y is ${env.y}'
     }
 
     post {

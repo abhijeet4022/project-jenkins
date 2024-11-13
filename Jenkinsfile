@@ -46,6 +46,11 @@
 
 // Jenkins Scripted Pipeline.
 
+// Define Function
+def testfunction(){
+    print "Do Function Test"
+}
+
 node('workstation') {
 
 // 1. Define Variables
@@ -69,6 +74,9 @@ node('workstation') {
 
         // Using print to display the value of 'z' (less preferred than echo in Jenkins)
         print z                // Prints '30'
+
+        // Calling the function.
+        testfunction()
     }
 
 }

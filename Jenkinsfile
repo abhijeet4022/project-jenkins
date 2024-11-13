@@ -51,6 +51,7 @@
 node('workstation'){
     // Access the variable using print.
     def x = 10
+    int z = 30
 
     // Access the variable using echo.
     env.y = 20
@@ -58,6 +59,7 @@ node('workstation'){
     stage('Access_Variable'){
         print x
         sh 'echo y is ${env.y}'
+        echo "z is ${z}"
     }
 
     post {

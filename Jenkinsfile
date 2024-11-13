@@ -62,7 +62,7 @@ node('workstation') {
         sh "echo y is ${env.y}"
 
         // This also works same but isn't recommended
-        sh 'echo y - ${y}'
+//         sh 'echo y - ${y}'
 
         // Display the value of integer variable 'z' using echo
         echo "z is ${z}"       // Prints 'z is 30'

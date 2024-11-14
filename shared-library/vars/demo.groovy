@@ -16,6 +16,7 @@ def call() {
                         sh 'echo "Running compile stage"'
                         sh 'pwd'
                         sh 'ls -l'
+                        sh 'hostname'
                     }
                 }
             }

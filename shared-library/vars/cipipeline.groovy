@@ -49,9 +49,7 @@ def call() {
 
             stage('CodeSecurity') {
                 when {
-                    allOf {
-                        expression { env.BRANCH_NAME == main }
-                    }
+                    expression { env.BRANCH_NAME == main }
                 }
                 steps {
                     echo "Check Code Security"

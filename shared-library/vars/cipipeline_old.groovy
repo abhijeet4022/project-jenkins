@@ -8,7 +8,9 @@ def call() {
             buildDiscarder(logRotator(numToKeepStr: '3'))
         }
 
+
         stages {
+//          Do the Code Compile And Built in main and sub branch but not in tag.
             stage('CodeCompileAndBuilt') {
                 when {
                     allOf {
@@ -23,6 +25,7 @@ def call() {
                 }
             }
 
+//          Do the Code UnitTest in main and sub branch but not in tag.
             stage('UnitTest') {
                 when {
                     allOf {
@@ -35,6 +38,7 @@ def call() {
                 }
             }
 
+//          Do the Code security check in main and sub branch but not in tag.
             stage('CodeQuality') {
                 when {
                     allOf {
@@ -47,6 +51,7 @@ def call() {
                 }
             }
 
+//          Do the Code security check only in main branch.
             stage('CodeSecurity') {
                 when {
                     expression { env.BRANCH_NAME == "main" }
@@ -56,6 +61,7 @@ def call() {
                 }
             }
 
+//          Release the Application only if tag is given or found.
             stage('Release') {
                 when {
                     expression { env.TAG_NAME ==~ ".*" }
@@ -66,6 +72,7 @@ def call() {
             }
         }
 
+//      Clea up the Workspace
         post {
             always {
                 script {

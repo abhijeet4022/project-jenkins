@@ -9,27 +9,29 @@ def call() {
         }
 
         stages {
-            stage('CompileCode') {
+            stage('CodeCompileAndBuilt') {
                 steps {
                     script {
-                        // Add valid shell commands here
-                        sh 'echo "Running compile stage"'
-                        sh 'pwd'
-                        sh 'ls -l'
-                        sh 'hostname'
+                        echo "Running Code Compile and Build stage"
                     }
                 }
             }
 
-            stage('Build') {
+            stage('UnitTest') {
                 steps {
-                    echo "Hello World"
+                    echo "Code Unit Testing"
                 }
             }
 
-            stage('Test') {
+            stage('CodeQuality') {
                 steps {
-                    echo "Test for pollSCM"
+                    echo "Check Code Quality"
+                }
+            }
+
+            stage('Release') {
+                steps {
+                    echo "Do the Release"
                 }
             }
         }

@@ -11,7 +11,7 @@ def call() {
         stages {
             stage('CodeCompileAndBuilt') {
                 when {
-                    alloff {
+                    allof {
                         expression { env.BRANCH_NAME != null }
                         expression { env.TAG_NAME == null }
                     }
@@ -25,7 +25,7 @@ def call() {
 
             stage('UnitTest') {
                 when {
-                    alloff {
+                    allof {
                         expression { env.BRANCH_NAME != null }
                         expression { env.TAG_NAME == null }
                     }
@@ -37,7 +37,7 @@ def call() {
 
             stage('CodeQuality') {
                 when {
-                    alloff {
+                    allof {
                         expression { env.BRANCH_NAME != null }
                         expression { env.TAG_NAME == null }
                     }
@@ -49,7 +49,7 @@ def call() {
 
             stage('CodeSecurity') {
                 when {
-                    alloff {
+                    allof {
                         expression { env.BRANCH_NAME == main }
                     }
                 }

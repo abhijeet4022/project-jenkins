@@ -39,7 +39,7 @@ def call() {
         post {
             always {
                 script {
-                    echo "Build finished"
+                    echo "Cleaning Workspace"
                     cleanWs()
                 }
             }

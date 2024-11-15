@@ -11,7 +11,10 @@ def call() {
         stages {
             stage('CodeCompileAndBuilt') {
                 when {
-                    expression { env.BRANCH_NAME != null }
+                    alloff {
+                        expression { env.BRANCH_NAME != null }
+                        expression { env.TAG_NAME == null }
+                    }
                 }
                 steps {
                     script {
@@ -22,7 +25,10 @@ def call() {
 
             stage('UnitTest') {
                 when {
-                    expression { env.BRANCH_NAME != null }
+                    alloff {
+                        expression { env.BRANCH_NAME != null }
+                        expression { env.TAG_NAME == null }
+                    }
                 }
                 steps {
                     echo "Code Unit Testing"
@@ -31,10 +37,24 @@ def call() {
 
             stage('CodeQuality') {
                 when {
-                    expression { env.BRANCH_NAME != null }
+                    alloff {
+                        expression { env.BRANCH_NAME != null }
+                        expression { env.TAG_NAME == null }
+                    }
                 }
                 steps {
                     echo "Check Code Quality"
+                }
+            }
+
+            stage('CodeSecurity') {
+                when {
+                    alloff {
+                        expression { env.BRANCH_NAME == main }
+                    }
+                }
+                steps {
+                    echo "Check Code Security"
                 }
             }
 

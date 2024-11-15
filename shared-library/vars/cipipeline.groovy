@@ -30,6 +30,9 @@ def call() {
             }
 
             stage('Release') {
+                when {
+                    expression { env.TAG_NAME ==~ ".*" }
+                }
                 steps {
                     echo "Do the Release"
                 }

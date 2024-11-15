@@ -10,6 +10,9 @@ def call() {
 
         stages {
             stage('CodeCompileAndBuilt') {
+                when {
+                    expression { env.BRANCH_NAME != null }
+                }
                 steps {
                     script {
                         echo "Running Code Compile and Build stage"
@@ -18,12 +21,18 @@ def call() {
             }
 
             stage('UnitTest') {
+                when {
+                    expression { env.BRANCH_NAME != null }
+                }
                 steps {
                     echo "Code Unit Testing"
                 }
             }
 
             stage('CodeQuality') {
+                when {
+                    expression { env.BRANCH_NAME != null }
+                }
                 steps {
                     echo "Check Code Quality"
                 }

@@ -1,7 +1,6 @@
 // Compile Source Code and Build Artifacts.
 def CodeCompileAndBuilt() {
 
-
 //  For Payment and Frontend no need of code compilation.
     if (env.codeType == "python" || env.codeType == "static") {
         return "Return, Do not need Compilation"

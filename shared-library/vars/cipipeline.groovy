@@ -1,7 +1,7 @@
 def call() {
     node('workstation') {
 
-        stage(Code Checkout) {
+        stage('Code Checkout') {
 //          Remove the old contain.
             sh "find . | sed -e '1d' | xargs rm -rf"
 

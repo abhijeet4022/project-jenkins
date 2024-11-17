@@ -57,7 +57,7 @@ def CodeQuality() {
             // Run the SonarQube scanner with the provided credentials.
             sh """
                 sonar-scanner \
-                -Dsonar.host.url=http://172.31.22.27:9090 \
+                -Dsonar.host.url=http://172.31.22.27:9000 \
                 -Dsonar.login=${env.sonaruser} \
                 -Dsonar.password=${env.sonarpass} \
                 -Dsonar.projectKey=${env.component} \

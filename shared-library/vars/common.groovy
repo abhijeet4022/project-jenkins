@@ -23,7 +23,7 @@ def CodeCompileAndBuilt() {
 
 // Executing Unit Testing Phase to Validate Code Functions.
 def UnitTest() {
-//  Since developer didnot written code for unit test so it will fail.
+//  Since developer didn't written code for unit test so it will fail.
     stage('Do Unit Test') {
         if (env.codeType == "static") {
             return "Static Content no need to Unit Test"

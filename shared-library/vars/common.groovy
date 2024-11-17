@@ -52,7 +52,7 @@ def CodeQuality() {
 
 // Executing Security Scanning to Identify Vulnerabilities.
 def CodeSecurity() {
-    stage('Do Code Security') {
+    stage('Check Code Security') {
         echo 'CodeSecurity'
     }
 }

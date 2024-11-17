@@ -46,14 +46,15 @@ def UnitTest() {
 // Perform Static Code Analysis for Quality.
 def CodeQuality() {
     stage("Check Code Quality") {
+
         // Hold the SonarQube username and password in variables.
         // `xargs` is used to remove the double quotes and `trim` to remove the newline.
         env.sonaruser = sh(script: 'aws ssm get-parameter --name "sonarqube.user" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
         env.sonarpass = sh(script: 'aws ssm get-parameter --name "sonarqube.pass" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
 
-        // Mask the password variable during the build logs
+        // Mask the password variable during the build logs.
         wrap([$class: "MaskPasswordsBuildWrapper", varPasswordPairs: [[password: env.sonarpass]]]) {
-            // Run the SonarQube scanner with the provided credentials
+            // Run the SonarQube scanner with the provided credentials.
             sh """
                 sonar-scanner \
                 -Dsonar.host.url=http://172.31.22.27:9090 \
@@ -63,8 +64,6 @@ def CodeQuality() {
                 -Dsonar.qualitygate.wait=true
             """
         }
-
-
     }
 }
 

@@ -9,7 +9,7 @@ def CodeCompileAndBuilt() {
     stage('Code Compile And Built Phase') {
 //      For Shipping Component.
         if (env.codeType == "maven") {
-            sh '/home/centos/mavan/bin/mvn clean package'
+            sh '/home/centos/mavan/bin/mvn  package'
         }
 
 //      For Catalogue, User and Cart Component
@@ -23,8 +23,20 @@ def CodeCompileAndBuilt() {
 
 // Executing Unit Testing Phase to Validate Code Functions.
 def UnitTest() {
+//  Since developer didnot written code for unit test so it will fail.
     stage('Do Unit Test') {
-        echo 'UnitTest'
+        if (env.codeType == "static") {
+            return "Static Content no need to Unit Test"
+        }
+        if (env.codeType == "nodejs") {
+            sh 'npm test'
+        }
+        if (env.codeType == "maven") {
+            sh '/home/centos/mavan/bin/mvn test'
+        }
+        if (env.codeType == "python") {
+            sh 'python3.6 -m unittest'
+        }
     }
 }
 

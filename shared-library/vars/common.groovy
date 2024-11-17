@@ -46,7 +46,7 @@ def UnitTest() {
 // Perform Static Code Analysis for Quality.
 def CodeQuality() {
     stage("Check Code Quality") {
-        echo 'CodeQuality'
+        sonaruser = 'aws ssm get-parameter --name "sonarqube.user" --with-decryption --query="Parameter.Value"'
     }
 }
 

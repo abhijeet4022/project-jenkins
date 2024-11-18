@@ -55,7 +55,18 @@ def CodeQuality() {
         // Mask the password variable during the build logs.
         wrap([$class: "MaskPasswordsBuildWrapper", varPasswordPairs: [[password: env.sonarpass]]]) {
             // Run the SonarQube scanner with the provided credentials.
-            sh """
+            if (env.codeType == "maven") {
+                sh """
+                sonar-scanner \
+                -Dsonar.host.url=http://172.31.22.27:9000 \
+                -Dsonar.login=${env.sonaruser} \
+                -Dsonar.password=${env.sonarpass} \
+                -Dsonar.projectKey=${env.component} \
+                -Dsonar.qualitygate.wait=true \
+                -Dsonar.java.binaries=./target
+            """
+            } else {
+                sh """
                 sonar-scanner \
                 -Dsonar.host.url=http://172.31.22.27:9000 \
                 -Dsonar.login=${env.sonaruser} \
@@ -63,6 +74,7 @@ def CodeQuality() {
                 -Dsonar.projectKey=${env.component} \
                 -Dsonar.qualitygate.wait=true
             """
+            }
         }
     }
 }

@@ -1,4 +1,13 @@
 def call() {
+
+    // Set build retention to keep only the last 3 builds
+    properties([
+            buildDiscarder(logRotator(
+                    numToKeepStr: '3',   // Keep only the last 3 builds
+                    artifactNumToKeepStr: '3' // Keep artifacts of only the last 3 builds
+            ))
+    ])
+
     node('workstation') {
 
         stage('Checkout SCM') {

@@ -3,8 +3,8 @@ def call() {
     // Set build retention to keep only the last 3 builds
     properties([
             buildDiscarder(logRotator(
-                    numToKeepStr: '5',   // Keep only the last 3 builds
-                    artifactNumToKeepStr: '5' // Keep artifacts of only the last 3 builds
+                    numToKeepStr: '4',   // Keep only the last 3 builds
+                    artifactNumToKeepStr: '4' // Keep artifacts of only the last 3 builds
             ))
     ])
 

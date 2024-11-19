@@ -96,19 +96,19 @@ def Release() {
         env.nexuspass = sh(script: 'aws ssm get-parameter --name "nexus.password" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
 
         wrap([$class: "MaskPasswordsBuildWrapper", varPasswordPairs: [[password: nexuspass]]]) {
-            sh 'echo ${env.TAG_NAME} > VERSION'
+            sh "echo ${env.TAG_NAME} > VERSION"
 
 //          Create the Artifact pack required file in zip file.
             if (env.codeType == 'nodejs') {
-                sh 'zip -r ${env.component}-${env.TAG_NAME}.zip node_modules server.js VERSION ${env.schemadir}'
+                sh "zip -r ${env.component}-${env.TAG_NAME}.zip node_modules server.js VERSION ${env.schemadir}"
             } else if (env.codeType == 'maven') {
-                sh 'cp target/${env.component}-1.0.jar ${component}.jar; zip -r ${env.component}-${env.TAG_NAME}.zip ${component}.jar VERSION ${env.schemadir}'
+                sh "cp target/${env.component}-1.0.jar ${component}.jar; zip -r ${env.component}-${env.TAG_NAME}.zip ${component}.jar VERSION ${env.schemadir}"
             } else {
-                sh 'zip -r ${env.component}-${env.TAG_NAME}.zip *'
+                sh "zip -r ${env.component}-${env.TAG_NAME}.zip *"
             }
 
 //          Upload the Artifact Zip file to Nexus.
-            sh 'curl -v -u ${env.nexususer}:${env.nexuspass} --upload-file ${env.component}-${env.TAG_NAME}.zip http://172.31.66.144:8081/repository/${component}/${env.component}-${env.TAG_NAME}.zip'
+            sh "curl -v -u ${env.nexususer}:${env.nexuspass} --upload-file ${env.component}-${env.TAG_NAME}.zip http://172.31.66.144:8081/repository/${component}/${env.component}-${env.TAG_NAME}.zip"
         }
     }
 }

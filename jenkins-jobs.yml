@@ -17,4 +17,4 @@
       - { job_name: "frontend", repo_name: "https://github.com/abhijeet4022/frontend-v1", folder_name: "CI-Pipelines" }
     sjobs:
       - { job_name: "roboshop-terraform", repo_name: "https://github.com/abhijeet4022/project-infra", folder_name: "Infra-Jobs" }
-      - { job_name: "roboshop-terraform", repo_name: "https://github.com/abhijeet4022/project-ansible-deployment", folder_name: "Deployment" }
+      - { job_name: "app-deployment", repo_name: "https://github.com/abhijeet4022/project-ansible-deployment", folder_name: "Deployment" }

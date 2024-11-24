@@ -27,7 +27,7 @@ def call() {
         }
 
         stages {
-            stage('Update the version in PS') {
+            stage('Update Version in Parameter Store') {
                 steps {
                     // Updates the application version in AWS Parameter Store
                     sh '''
@@ -42,7 +42,7 @@ def call() {
             }
 
 
-            stage('Application Deployment') {
+            stage('Deploy Application') {
                 steps {
                     sh '''
                     aws ec2 describe-instances --filters "Name=tag:Name,Values=${ENV}-${COMPONENT}" --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text > inv

@@ -31,6 +31,7 @@ def call() {
                 steps {
                     // Updates the application version in AWS Parameter Store
                     sh '''
+                    echo "Current Working Dir is - $(pwd)"
                     aws ssm put-parameter --name "${COMPONENT}.${ENV}.appVersion" --type "String" --value "${VERSION}" --overwrite
                     '''
 
@@ -45,6 +46,7 @@ def call() {
             stage('Deploy Application') {
                 steps {
                     sh '''
+                    echo "Current Working Dir is - $(pwd)"
                     aws ec2 describe-instances --filters "Name=tag:Name,Values=${ENV}-${COMPONENT}" --query 'Reservations[*].Instances[*].PrivateIpAddress' --output text > inv
                     if [ -s inv ]; then
                         ansible-playbook -i inv main.yml -e component=${COMPONENT} -e env=${ENV} -e ansible_user=${SSH_USR} -e ansible_password=${SSH_PSW}

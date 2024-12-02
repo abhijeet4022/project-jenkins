@@ -88,28 +88,41 @@ def CodeSecurity() {
     }
 }
 
-// Packaging and Releasing the Build for Deployment.
+// This is for Nexus - Application Artifact
+//// Packaging and Releasing the Build for Deployment.
+//def Release() {
+//    stage('Software Release') {
+//        // Hold the Nexus username and password in variables.
+//        env.nexususer = sh(script: 'aws ssm get-parameter --name "nexus.username" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
+//        env.nexuspass = sh(script: 'aws ssm get-parameter --name "nexus.password" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
+//
+//        wrap([$class: "MaskPasswordsBuildWrapper", varPasswordPairs: [[password: nexuspass]]]) {
+//            sh "echo ${env.TAG_NAME} > VERSION"
+//
+////          Create the Artifact pack required file in zip file.
+//            if (env.codeType == 'nodejs') {
+//                sh "zip -r ${env.component}-${env.TAG_NAME}.zip node_modules server.js VERSION ${env.schemadir}"
+//            } else if (env.codeType == 'maven') {
+//                sh "cp target/${env.component}-1.0.jar ${component}.jar; zip -r ${env.component}-${env.TAG_NAME}.zip ${component}.jar VERSION ${env.schemadir}"
+//            } else {
+//                sh "zip -r ${env.component}-${env.TAG_NAME}.zip *"
+//            }
+//
+////          Upload the Artifact Zip file to Nexus.
+//            sh "curl -v -u ${env.nexususer}:${env.nexuspass} --upload-file ${env.component}-${env.TAG_NAME}.zip http://172.31.66.144:8081/repository/${component}/${env.component}-${env.TAG_NAME}.zip"
+//        }
+//    }
+//}
+
+// This is for AWS ECR Images.
 def Release() {
-    stage('Software Release') {
-        // Hold the Nexus username and password in variables.
-        env.nexususer = sh(script: 'aws ssm get-parameter --name "nexus.username" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
-        env.nexuspass = sh(script: 'aws ssm get-parameter --name "nexus.password" --with-decryption --query="Parameter.Value" | xargs', returnStdout: true).trim()
+    stage('Image Release') {
+        sh '''
+        aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 060795929502.dkr.ecr.us-east-1.amazonaws.com
+        docker build -t 060795929502.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.TAG_NAME} .
+        docker push 060795929502.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.TAG_NAME}
+'''
 
-        wrap([$class: "MaskPasswordsBuildWrapper", varPasswordPairs: [[password: nexuspass]]]) {
-            sh "echo ${env.TAG_NAME} > VERSION"
-
-//          Create the Artifact pack required file in zip file.
-            if (env.codeType == 'nodejs') {
-                sh "zip -r ${env.component}-${env.TAG_NAME}.zip node_modules server.js VERSION ${env.schemadir}"
-            } else if (env.codeType == 'maven') {
-                sh "cp target/${env.component}-1.0.jar ${component}.jar; zip -r ${env.component}-${env.TAG_NAME}.zip ${component}.jar VERSION ${env.schemadir}"
-            } else {
-                sh "zip -r ${env.component}-${env.TAG_NAME}.zip *"
-            }
-
-//          Upload the Artifact Zip file to Nexus.
-            sh "curl -v -u ${env.nexususer}:${env.nexuspass} --upload-file ${env.component}-${env.TAG_NAME}.zip http://172.31.66.144:8081/repository/${component}/${env.component}-${env.TAG_NAME}.zip"
-        }
     }
 }
 

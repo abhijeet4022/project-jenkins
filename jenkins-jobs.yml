@@ -18,3 +18,4 @@
     sjobs:
       - { job_name: "roboshop-infra", repo_name: "https://github.com/abhijeet4022/project-infra", folder_name: "Infra-Jobs" }
       - { job_name: "app-deployment", repo_name: "https://github.com/abhijeet4022/project-ansible-deployment", folder_name: "Deployment" }
+      - { job_name: "helm-deployment", repo_name: "https://github.com/abhijeet4022/project-helm", folder_name: "Deployment" }

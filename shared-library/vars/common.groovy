@@ -119,8 +119,8 @@ def Release() {
     stage('Image Release') {
         sh '''
         aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 060795929502.dkr.ecr.us-east-1.amazonaws.com
-        docker build -t 060795929502.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.TAG_NAME} .
-        docker push 060795929502.dkr.ecr.us-east-1.amazonaws.com/${env.component}:${env.TAG_NAME}
+        docker build -t 060795929502.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .
+        docker push 060795929502.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME}
 '''
 
     }

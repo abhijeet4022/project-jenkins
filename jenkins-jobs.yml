@@ -16,6 +16,7 @@
       - { job_name: "payment", repo_name: "https://github.com/abhijeet4022/payment-v1", folder_name: "CI-Pipelines" }
       - { job_name: "frontend", repo_name: "https://github.com/abhijeet4022/frontend-v1", folder_name: "CI-Pipelines" }
       - { job_name: "init-container", repo_name: "https://github.com/abhijeet4022/project-init-cont-v1", folder_name: "CI-Pipelines" }
+      - { job_name: "init-container-schema", repo_name: "https://github.com/abhijeet4022/project-init-cont-schema", folder_name: "CI-Pipelines" }
     sjobs:
       - { job_name: "roboshop-infra", repo_name: "https://github.com/abhijeet4022/project-infra", folder_name: "Infra-Jobs" }
       - { job_name: "app-deployment", repo_name: "https://github.com/abhijeet4022/project-ansible-deployment", folder_name: "Deployment" }

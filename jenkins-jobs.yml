@@ -19,5 +19,6 @@
       - { job_name: "init-container-schema", repo_name: "https://github.com/abhijeet4022/project-init-cont-schema-v1", folder_name: "CI-Pipelines" }
     sjobs:
       - { job_name: "roboshop-infra", repo_name: "https://github.com/abhijeet4022/project-infra", folder_name: "Infra-Jobs" }
+      - { job_name: "parameter-store", repo_name: "https://github.com/abhijeet4022/project-parameterstore", folder_name: "Infra-Jobs" }
       - { job_name: "app-deployment", repo_name: "https://github.com/abhijeet4022/project-ansible-deployment", folder_name: "Deployment" }
       - { job_name: "helm-deployment", repo_name: "https://github.com/abhijeet4022/project-helm", folder_name: "Deployment" }
